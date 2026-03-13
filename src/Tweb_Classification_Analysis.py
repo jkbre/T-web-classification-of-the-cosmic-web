@@ -48,7 +48,7 @@ start_time = time.time()
 # ----------------------------------------- READ FILE TO GET THE BOX SIZE ----------------------------------------------#
 
 
-def get_box_size() -> int:
+def get_box_size(output_dir: str) -> int:
     """
     Extract the box size from the 'simulation_properties.txt' file.
 
@@ -56,11 +56,15 @@ def get_box_size() -> int:
     - int: The extracted box size.
 
     Raises:
-    - FileNotFoundError: If 'simulation_properties.txt' does not exist in the current directory.
+    - FileNotFoundError: If 'simulation_properties.txt' does not exist in the output or current directory.
     - ValueError: If the box size cannot be found or parsed correctly.
     """
     try:
-        with open("simulation_properties.txt", "r") as f:
+        preferred_path = os.path.join(output_dir, "simulation_properties.txt")
+        fallback_path = "simulation_properties.txt"
+        file_path = preferred_path if os.path.exists(preferred_path) else fallback_path
+
+        with open(file_path, "r") as f:
             lines = f.readlines()
 
         for line in lines:
@@ -74,7 +78,7 @@ def get_box_size() -> int:
 
     except FileNotFoundError as e:
         logging.error(
-            f"'simulation_properties.txt' file does not exist in current working directory: {e}"
+            f"'simulation_properties.txt' file does not exist in output directory '{output_dir}' or current working directory: {e}"
         )
         raise
 
@@ -462,7 +466,7 @@ if __name__ == "__main__":
             yn_potential,
             yn_traceless,
         ) = read_input_file("config/input_params.txt")
-        box_size = get_box_size()
+        box_size = get_box_size(save_path)
         smooth_scales, truncated_scales = extract_smoothing_scales(smoothing_scales)
         # Load the density fields that were saved using LSS_Tidal_shear.py
         smoothed_density_fields = load_density_fields()

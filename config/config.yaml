@@ -1,6 +1,6 @@
 paths:
-    snapshot_file: /path/to/snapshot/file
-    results_directory: /path/to/the/directory
+    snapshot_file: /var/home/worm/GitHub/CFTproj/data/dave-demo/lcdm_z0p000
+    results_directory: /var/home/worm/GitHub/CFTproj/output
     density_field_file: null
 grid:
     size: 256
@@ -8,9 +8,9 @@ density_field:
     create: true
     smooth: true
     smoothing_scales:
-      - 0.0
-      - 1.0
-      - 3.0
+    - 0.0
+    - 1.0
+    - 3.0
 calculations:
     potential_field: true
     traceless_tidal_tensor: true

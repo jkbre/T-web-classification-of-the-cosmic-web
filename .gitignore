@@ -1,0 +1,13 @@
+# Python bytecode / binaries
+__pycache__/
+
+# Editors / IDEs
+.vscode/
+.idea/
+
+# Local env / logs
+.env
+.venv
+
+# Keep directory placeholders even when parent dirs are ignored
+!.gitkeep

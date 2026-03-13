@@ -143,7 +143,9 @@ def extract_simulation_params(
 
 
 def save_simulation_properties(
-    snapshot_header: pynbody.simdict.SimDict, snapshot: pynbody.snapshot.SimSnap
+    snapshot_header: pynbody.simdict.SimDict,
+    snapshot: pynbody.snapshot.SimSnap,
+    output_dir: str,
 ) -> None:
     """
     Save the simulation properties to a file.
@@ -151,9 +153,13 @@ def save_simulation_properties(
     Parameters:
     - snapshot_header (pynbody.simdict.SimDict): The simulation header.
     - snapshot (pynbody.snapshot.SimSnap): The loaded snapshot.
+    - output_dir (str): Directory where simulation_properties.txt will be saved.
     """
     try:
-        with open("simulation_properties.txt", "w") as f:
+        os.makedirs(output_dir, exist_ok=True)
+        sim_props_path = os.path.join(output_dir, "simulation_properties.txt")
+
+        with open(sim_props_path, "w") as f:
             f.write("-------------------------------------------------------------\n")
             f.write(" The file contains the simulation properties and parameters \n")
             f.write("-------------------------------------------------------------\n\n")
@@ -167,7 +173,7 @@ def save_simulation_properties(
             f.write(f"Mass of each particle: {mean_mass} * {mean_mass.units}\n")
             total_particles = snapshot["pos"].shape[0]
             f.write(f"Total number of particles: {total_particles}\n")
-        logging.info("Simulation properties saved successfully.")
+        logging.info(f"Simulation properties saved successfully at {sim_props_path}.")
     except Exception as e:
         logging.error(f"Error saving simulation properties: {e}")
         raise
@@ -566,7 +572,11 @@ if __name__ == "__main__":
 
         box_size = int(extracted_values["boxsize"])
 
-        save_simulation_properties(snapshot_header=snap_header, snapshot=snap)
+        save_simulation_properties(
+            snapshot_header=snap_header,
+            snapshot=snap,
+            output_dir=save_path,
+        )
 
         save_particle_positions_and_velocities(snapshot=snap)
 

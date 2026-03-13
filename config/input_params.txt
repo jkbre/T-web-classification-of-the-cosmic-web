@@ -1,22 +1,9 @@
-
-# This file will be used to read the inputs given by the user. Therefore, DO NOT change the question lines.
-# Note that all the files will be saved in the path you provide. Plots will be saved in the current working directory.
-# Also note that this script will be read each time you run the scripts. So make sure that the entries serves your needs.
-
-#----------------------------------------------------#
-Give the inputs to run the scripts
-#----------------------------------------------------#
-
-Path to the snapshot file: /path/to/snapshot/file
-Path where you want to save the results: /path/to/the/directory
-
-Enter the grid size: 512                             # Should be an integer
-
-Create the density field? (yes/no): yes              # If you write "no", give the path to the density field array (preferably .npy)
+Path to the snapshot file: /var/home/worm/GitHub/CFTproj/data/dave-demo/lcdm_z0p000
+Path where you want to save the results: /var/home/worm/GitHub/CFTproj/output
+Enter the grid size: 256
+Create the density field? (yes/no): yes
 Path to load the density field (optional): 
-
 Smooth density field? (yes/no): yes
-Smoothing scales [h^-1 Mpc]: 0.12 0.4 0.76 1.5             # The values should be space-separated
-
-Calculate potential field? (yes/no): no
-Calculate traceless tidal tensor? (yes/no): no
+Smoothing scales [h^-1 Mpc]: 0.0 1.0 3.0
+Calculate potential field? (yes/no): yes
+Calculate traceless tidal tensor? (yes/no): yes
