@@ -1,0 +1,7 @@
+numpy
+scipy
+matplotlib
+tqdm
+pynbody
+PyYAML
+Pylians3
